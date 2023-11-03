@@ -12,29 +12,27 @@ import "tachyons";
 import "./App.css";
 import { Component } from "react";
 
+const getInitialState = (user) => {
+  return {
+    input: "",
+    imageURL: "",
+    boundingBoxes: null,
+    route: user == null ? "signin" : "home",
+    user: user ?? {
+      id: "",
+      name: "",
+      email: "",
+      entries: 0,
+      joined: new Date(),
+    },
+  };
+};
+
 class App extends Component {
   constructor() {
     super();
     const user = JSON.parse(localStorage.getItem("user"));
-    this.state = {
-      input: "",
-      imageURL: "",
-      boundingBoxes: null,
-      // {
-      //   bottom_row: 0,
-      //   left_col: 0,
-      //   right_col: 0,
-      //   top_row: 0,
-      // },
-      route: user == null ? "signin" : "home",
-      user: user ?? {
-        id: "",
-        name: "",
-        email: "",
-        entries: 0,
-        joined: new Date(),
-      },
-    };
+    this.state = getInitialState(user);
   }
 
   onInputChange = (event) => {
@@ -63,7 +61,12 @@ class App extends Component {
   };
 
   onRouteChange = (route) => {
-    this.setState({ route });
+    if (route === "signin") {
+      const user = JSON.parse(localStorage.getItem("user"));
+      this.setState(getInitialState(user));
+    } else {
+      this.setState({ route });
+    }
   };
 
   loadUser = (data) => {
