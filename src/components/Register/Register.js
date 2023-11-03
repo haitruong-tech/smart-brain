@@ -34,6 +34,7 @@ class Register extends React.Component {
       alert(message);
       return;
     }
+    localStorage.setItem("user", JSON.stringify(message));
     this.props.loadUser(message);
     this.props.onRouteChange("home");
   };

@@ -32,7 +32,8 @@ class SignIn extends React.Component {
       alert(message);
       return;
     }
-    this.props.loadUser(message)
+    localStorage.setItem("user", JSON.stringify(message));
+    this.props.loadUser(message);
     this.props.onRouteChange("home");
   };
 

@@ -15,6 +15,7 @@ import { Component } from "react";
 class App extends Component {
   constructor() {
     super();
+    const user = JSON.parse(localStorage.getItem("user"));
     this.state = {
       input: "",
       imageURL: "",
@@ -25,8 +26,8 @@ class App extends Component {
       //   right_col: 0,
       //   top_row: 0,
       // },
-      route: "signin",
-      user: {
+      route: user == null ? "signin" : "home",
+      user: user ?? {
         id: "",
         name: "",
         email: "",
