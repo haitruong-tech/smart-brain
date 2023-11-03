@@ -11,7 +11,6 @@ import FaceRecognition from "./components/FaceRecognition/FaceRecognition";
 import "tachyons";
 import "./App.css";
 import { Component } from "react";
-import { calculateFaceBoundingBox } from "./services/clarifai";
 
 class App extends Component {
   constructor() {
