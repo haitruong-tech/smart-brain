@@ -43,7 +43,6 @@ class App extends Component {
     // Prevent delay displaying image
     this.setState({ imageURL: this.state.input });
 
-    // const boundingBoxes = await calculateFaceBoundingBox(this.state.input);
     const response = await fetch(
       `${process.env.REACT_APP_BASE_API_URL}/image/face-detect`,
       {
@@ -55,6 +54,10 @@ class App extends Component {
         }),
       }
     );
+    if (!response.ok) {
+      alert("Something went wrong while detect face");
+      return;
+    }
     const { entries, boundingBoxes } = await response.json();
     // Set bounding box around face
     this.setState({ user: { ...this.state.user, entries }, boundingBoxes });
