@@ -59,6 +59,7 @@ class App extends Component {
       return;
     }
     const { entries, boundingBoxes } = await response.json();
+    localStorage.setItem("user", JSON.stringify({ ...this.state.user, entries }))
     // Set bounding box around face
     this.setState({ user: { ...this.state.user, entries }, boundingBoxes });
   };
